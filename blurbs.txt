@@ -1,0 +1,28 @@
+ projects:
+
+ band: gogettum
+was the front man of a rock band and released one single before the band dissolved. 
+
+ music: solo artist
+I write and perform original music and arrangements on a regular basis at local open mic nights.
+
+ hardware: face tracker robot
+used the "person sensor" face tracker chip from "Useful Sensors" and a raspberry pico  to create a face tracking robot using the example code from the sensor manufacturer. I created a 3d printed housing designed for the clip on the mini pan-tilt servo kit from adafruit. The plan was to make a wearable robot that clips to the brim of a hat. This never fully culminated as I never dove into making a full housing for the robot or a portable power source.
+
+ software: Card based video game
+ Real time card game built in Godot engine. Plans for a story and betting mechanics never materialized.
+
+ software: "PasteBuddy" data entry tool
+ Designed a data entry tool that replaced frequently typed phrases with mouse inputs, significantly improving response time in live chats and emails at my call center job.
+
+software:
+email interface for local ai model. Set up email listener and an older gpt model (gpt2) that would run on an old laptop of mine but the model didn't behave the way more modern models do and the project was put on hold due to lack of appropriately powerful hardware.
+
+software:
+Took the lead on a bootcamp project with the goal of designing a RAG enabled AI model and planning interface that would help specialists with planning cubesat sattellite missions. I focused primarily on project planning and had a fun time with my classmates. I learned how to harness team memebers individual strengths as well as navigate issues with individuals trying to take over others responsibilities. I was introduced to working with LLM API's and proper storage of api keys, as well as an introduction to RAG with large language models. Our teams combined skill, creativity, and dedication brought us to victory over the other team in the competition.
+
+software:
+Raspberry pi low security web based camera access point. I set up a gen 1 raspberry pi equipped with a camera module and wrote a simple webpage using (insert technologies here) to access the camera.
+designed a cute pixel art icon of the RasPi-cam for the pages favicon.
+ 
+

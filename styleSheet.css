@@ -1,0 +1,48 @@
+:root {
+  --boxHeight: 400px; 
+}
+/**/
+.container {
+  display: grid;
+  grid-template-areas:
+    "content content content"
+    "content content content"
+    "content content content";
+  grid-template-columns: 1fr 1fr 1fr ;
+  gap: 3px;
+  background-color: dodgerblue;
+  padding: 5px;
+  text-align: center;
+}
+.container div {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  background-color: white;
+  object-fit: contain;
+  width:100%;
+  cursor: pointer;
+}
+.image-container {
+  width: 200px;
+  height: 300px;
+  border: 1px solid black;
+}
+
+.image-container img {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*                                      */
+.portrait {
+	max-width:15%;
+	height:auto
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
