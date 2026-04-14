@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<title>ANDREW PEYROT, PERSONAL WEBSITE</title>
+    <style>
+      .buddy  {
+        background-color: #3476AC; /* Green background */
+        border: 1px solid #164963; /* Green border */
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        width: 100%; /* Set a width if needed */
+        display: block; /* Make the buttons appear below each other */
+      }
+      .dateBuddy  {
+        background-color: #FF9001; /* Green background */
+        border: 1px solid #A04916; /* Green border */
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        width: 100%; /* Set a width if needed */
+        display: block; /* Make the buttons appear below each other */
+      }
+
+      .buddy :not(:last-child) {
+        border-bottom: none; /* Prevent double borders */
+      }
+
+      /* Add a background color on hover */
+      .buddy:hover {
+        background-color: #27577F;
+      }
+      .dateBuddy:hover {
+        background-color: #B76501;
+      }
+      .new-window{
+
+      }
+      .center {
+        text-align: center;
+      }
+      .hidden{
+        visibility: hidden;
+      }
+    </style>
+    <link rel="stylesheet" href="../styleSheet.css">
+	</head>
+	<body>
+    <div class="nav">
+      <a href="./index.html">Home</a>
+      <a href="./about.html">About</a>
+      <a href="./projects.html">Projects</a>
+    </div>
+
+    <div class="image-crop">
+      <img src="../resources/me.jpg">
+    </div>
+		<h1>Software Project: Paste Buddy Data Entry Tool</h1>
+    <p>This tool was designed to make me more efficient at my job at a call center. I noticed that there were unecessary portions of time spent typing the same phrases over and over to customers in live chats and emails. There were canned responses and email templates that could be used, but the interfaces we used varied in usefulness across platforms. I created something that was portable, and suited the specific needs of that job and my coworkers quickly took a liking to the tool. The tool was written with vanilla CSS, HTML, and JavaScript so it could simply be emailed and saved as an HTML file on the computer. Last I checked, the department still uses the tool on a day to day basis.<br><br> The code is included below and will function, but behaves a little wonky on my personal website. You simply right click to save whatever is in your clipboard into a button, left click to copy it into your clipboard. Middle mouse button toggles the button to add a the current date and optional initials at the end of the text. Feel free to download the source code from my GitHub account.</p>
+    <div> 
+      <div class='new-window center', id='popOut'>
+        <a onclick="newWindow();">
+          Pop Out Window
+        </a>
+      </div>
+
+      <div class="btn-group", id='btn-group'>
+
+      </div>
+
+      <div class="inputs center", id='inputs'>
+        <label for="initials">Initials:</label>
+        <input type="text" id="initials" name="initials" size="1">
+      </div>
+
+
+      <///////////////////HTML UP HERE///////////////////>
+
+      <///////////////JAVASCRIPT DOWN HERE///////////////>
+
+      <script>
+        window.getCount = function(parent, getChildrensChildren){//accepts DOM object and bool, counts children(and grandchildren) of DOM object
+            var relevantChildren = 0;
+            var children = parent.childNodes.length;
+            for(var i=0; i < children; i++){
+                if(parent.childNodes[i].nodeType != 3){
+                    if(getChildrensChildren)
+                        relevantChildren += getCount(parent.childNodes[i],true);
+                    relevantChildren++;
+                }
+            }
+            return relevantChildren;
+        }
+        async function makeButton(input) {//makes a new button
+          var btngrp = document.getElementById('btn-group');//get reference to button group
+          var btn = document.createElement('BUTTON');//make new button
+          btn.innerHTML = 'Left(copy)|Right(paste)|Mid(add date)'; //display
+          btn.classList.add('buddy');
+          btn.value ='Left click to copy, right click to paste';
+          btn.id= getCount(btngrp);//set id to position of button
+          btngrp.append(btn);//append button to end of group
+
+          localStorage.setItem("button"+btn.id, btn.value);//store value in memory
+        }
+        async function restoreButton(input) {//makes a new button, accepts a number
+          console.log(" in restoreButton");
+          var btngrp = document.getElementById('btn-group');//get reference to button group
+          var btn = document.createElement('BUTTON');//make new button
+          btn.classList.add('buddy');
+          btn.id= getCount(btngrp);//set id to position of button
+          btn.value = localStorage.getItem("button"+input);
+
+          var text = btn.value;
+          var stringEnd = text.length;
+          var shownCharacters = (window.innerWidth / 20); //sizes shown text by window size
+          if (stringEnd > (shownCharacters * 2 + 11) ){
+            input.innerHTML = text.substr(0,shownCharacters) + "..." + text.substr((stringEnd - shownCharacters), stringEnd);
+          }
+          else{
+            input.innerHTML = text;
+          }
+
+          btngrp.append(btn);//append button to end of group
+        }
+        async function paste(input) {//accepts html element and sets innerHTML to clipboard contents
+          const text = await navigator.clipboard.readText();
+          input.value = text;
+          var stringEnd = text.length;
+          var shownCharacters = (window.innerWidth / 20); //sizes shown text by window size
+          if (stringEnd > (shownCharacters * 2 + 11) ){
+            input.innerHTML = text.substr(0,shownCharacters) + "..." + text.substr((stringEnd - shownCharacters), stringEnd);
+          }
+          else{
+            input.innerHTML = text;
+          }
+
+          localStorage.setItem("button"+input.id, text);//store value in memory
+        }
+        async function copy(input) {//accepts html element and copies innerHTML to clipboard
+          console.log(input);
+          if (input.className == "dateBuddy"){
+            console.log("in input class = datebuddy");
+            var d = new Date(Date.now()).toLocaleString().split(',')[0];
+            var dLength = d.toString().length;
+            var dateAppend = (' -'+document.getElementById('initials').value + ' ' + d);
+
+            var text = input.value + dateAppend;
+          }
+          else{
+            //console.log("in copy function else block");
+            var text = input.value;
+          }
+
+          try {
+            await navigator.clipboard.writeText(text);
+            console.log('Element contents copied to clipboard');
+          } catch (err) {
+            console.error('Failed to copy: ', err);
+          }
+        }
+        async function newWindow(){//reopen page in a popup to allow full resizing
+          //first clear current page
+          setTimeout(window.close, 10);
+          var divs = document.getElementsByTagName('div');
+          for (var i = 0, l = divs.length; i < l; i++) {
+              if (divs[i].getAttribute('class') == 'btn-group')
+                  if (divs[i].style.display == 'none') divs[i].style.display = '';
+                  else divs[i].style.display = 'none';
+          }
+          var params = [
+              'height='+screen.height,
+              'width='+420,
+              'fullscreen=yes' // only works in IE, but here for completeness
+          ].join(',');
+               // and any other options from
+               // https://developer.mozilla.org/en/DOM/window.open
+               //window.open(document.URL, '_blank', 'location=yes,height=,width=420,scrollbars=yes,status=yes');
+          //
+
+          var popup = window.open(document.URL, '_blank', params, 'location=no,scrollbars=no,status=no');
+          popup.moveTo(0,0);
+
+          setTimeout(window.close, 10);
+          /*
+          var divs = document.getElementsByTagName('div');
+          for (var i = 0, l = divs.length; i < l; i++) {
+              if (divs[i].getAttribute('class') == 'new-window')
+                  if (divs[i].style.display == 'none') divs[i].style.display = '';
+                  else divs[i].style.display = 'none';
+          }
+          */
+        }
+
+        async function upDateButtons(input){
+          var dateBuddyVar = document.getElementsByClassName('dateBuddy');
+          var buddyVar = document.getElementsByClassName('buddy');
+          var d = new Date(Date.now()).toLocaleString().split(',')[0];
+          var dLength = d.toString().length;
+          var dateAppend = (' -'+document.getElementById('initials').value + ' ' + d);
+
+
+          for (i=0; i<dateBuddyVar.length; i++){//this loops through datebuddy buttons and updates them
+            //var localVar = localStorage.getItem("button"+dateBuddyVar.item(i).id);
+            //var text = String(localVar);
+            //code to use localstorage instead of value up here
+
+            var text = String(dateBuddyVar.item(i).value);
+            var textEnd = text.substr( (text.length-dLength), text.length);
+            var dateEnd = dateAppend.substr( (dateAppend.length-dLength), text.length);
+
+            //console.log(textEnd +' & '+ dateEnd);
+
+            if(textEnd != dateEnd){
+              //dateBuddyVar.item(i).innerHTML = dateBuddyVar.item(i).value;
+              //dateBuddyVar.item(i).innerHTML += dateAppend;
+              //old working text up here
+
+              //code that uses new text display compression feature below
+              var text = dateBuddyVar.item(i).value;//start
+              var stringEnd = text.length;
+              var shownCharacters = ( (window.innerWidth / 20) - 6); //sizes shown text by window size. -6 to accomodate for date display
+              if (stringEnd > (shownCharacters * 2 + 11) ){
+                dateBuddyVar.item(i).innerHTML = text.substr(0,shownCharacters) + "..." + text.substr((stringEnd - shownCharacters), stringEnd);
+                dateBuddyVar.item(i).innerHTML += dateAppend;
+
+              }
+              else{
+                dateBuddyVar.item(i).innerHTML = text;
+                dateBuddyVar.item(i).innerHTML += dateAppend;
+              }
+            }
+
+
+          }
+          for (i=0; i<buddyVar.length; i++){//this loops through buddy buttons and updates them
+            //buddyVar.item(i).innerHTML = buddyVar.item(i).value;
+            //old working code up here
+
+            //code that uses new text display compression feature below
+            var text = buddyVar.item(i).value;//start
+            var stringEnd = text.length;
+            var shownCharacters = (window.innerWidth / 20); //sizes shown text by window size
+            if (stringEnd > (shownCharacters * 2 + 11) ){
+              buddyVar.item(i).innerHTML = text.substr(0,shownCharacters) + "..." + text.substr((stringEnd - shownCharacters), stringEnd);
+            }
+            else{
+              buddyVar.item(i).innerHTML = text;
+            }
+          }
+        }
+        /////////////function definitions up here/////////////
+        //This codeblock included to generate the first button programatically
+        var check = localStorage.getItem("button0");
+        if( check == null ){
+          makeButton();
+        }else{
+          var index = 0;
+          var loopFlag = true;
+          while(loopFlag){
+            console.log("in loopflag: "+index);
+            console.log(localStorage.getItem("button0"));
+            var value = localStorage.getItem("button"+index);
+            if(value !== null){
+              restoreButton(index);
+              index += 1;
+            }
+            else{
+              loopFlag = false;
+            }
+          }
+
+          upDateButtons();
+        }
+
+        //Including this solved an issue with first buttons class being undefined
+
+        //this code block gets the clicked element
+        document.addEventListener('click', function(e) {//left click listener
+          if (e.button == 0) {
+            e = e || window.event;
+            var target = e.target || e.srcElement;//get clicked element as object and store
+            text = target.textContent || target.innerText;
+            upDateButtons(target);
+            if (target == '[object HTMLButtonElement]'){//if the element is a button do this
+              copy(target);
+              //alert('left clicked button with "'+target.innerHTML+'" as innerHTML');
+            }
+
+          }
+        }, false);
+        document.addEventListener('auxclick', function(e) {//middle click listener
+          if (e.button == 1) {
+            e = e || window.event;
+            var target = e.target || e.srcElement;//get clicked element as object and store
+            text = target.textContent || target.innerText;
+            if (target == '[object HTMLButtonElement]'){//if the element is a button do this
+              if(target.classList.contains('buddy')){//toggle button class between a dated or non dated button
+                target.classList.remove('buddy');
+                target.classList.add('dateBuddy');
+              }else if(target.classList.contains('dateBuddy')){//toggle button class between a dated or non dated button
+                target.classList.add('buddy');
+                target.classList.remove('dateBuddy');
+              }
+              console.log('middle clicked button id:'+target.id+"and class: "+target.classList);
+              upDateButtons(target);
+            }
+          }
+        }, false);
+        document.addEventListener('auxclick', function(e) {//right click listener
+          if (e.button == 2) {
+            e = e || window.event;
+            var target = e.target || e.srcElement;//get clicked element as object and store
+            //text = target.textContent || target.innerText;
+            if (target == '[object HTMLButtonElement]'){//if the element is a button do this
+              //console.log('element is button');
+              paste(target);
+              var btngrp = document.getElementById('btn-group');//get reference to button group
+              //console.log("(target.id == (getCount(btngrp) - 1) ) : "+"("+target.id+" == ("+getCount(btngrp)+" - 1) )");
+              if (target.id == (getCount(btngrp) - 1) ){//if button rightclicked is the last button
+                makeButton();
+              }
+            }
+          }
+        }, false);
+        if (window.innerWidth < (screen.width/3) ){//on page load hide "popOut" div if window is <1/3 of the screen
+          document.getElementById('popOut').style.display = 'none';
+        }
+
+        function stringIsEmpty(value) {
+
+            return value ? value.trim().length == 0 : true;
+
+        }
+      </script>
+    
+    <br>
+    <div class="single-item-container">
+      
+        <div class="project-image-container" onclick="location.href='../resources/pastebuddy_in_use.jpg'" >
+          <img src="../resources/pastebuddy_in_use.jpg">
+        </div>
+    </div>
+        <!--contact-->
+        <br><br>contact: andrewpeyrot@gmail.com | <a href="https://github.com/mr-weeto">Github</a> | <a href="https://www.linkedin.com/in/andrew-peyrot-27940419a/">LinkedIn</a>
+      </body>
+    </html>

@@ -15,13 +15,13 @@ used the "person sensor" face tracker chip from "Useful Sensors" and a raspberry
  software: "PasteBuddy" data entry tool
  Designed a data entry tool that replaced frequently typed phrases with mouse inputs, significantly improving response time in live chats and emails at my call center job.
 
-software:
-email interface for local ai model. Set up email listener and an older gpt model (gpt2) that would run on an old laptop of mine but the model didn't behave the way more modern models do and the project was put on hold due to lack of appropriately powerful hardware.
+software:email interface for local ai model. 
+Set up email listener and an older gpt model (gpt2) that would run on an old laptop of mine but the model didn't behave the way more modern models do and the project was put on hold due to lack of appropriately powerful hardware.
 
-software:
+software: STEM bootcamp
 Took the lead on a bootcamp project with the goal of designing a RAG enabled AI model and planning interface that would help specialists with planning cubesat sattellite missions. I focused primarily on project planning and had a fun time with my classmates. I learned how to harness team memebers individual strengths as well as navigate issues with individuals trying to take over others responsibilities. I was introduced to working with LLM API's and proper storage of api keys, as well as an introduction to RAG with large language models. Our teams combined skill, creativity, and dedication brought us to victory over the other team in the competition.
 
-software:
+software: RaspBerry Pi web cam interface
 Raspberry pi low security web based camera access point. I set up a gen 1 raspberry pi equipped with a camera module and wrote a simple webpage using (insert technologies here) to access the camera.
 designed a cute pixel art icon of the RasPi-cam for the pages favicon.
  
