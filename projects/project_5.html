@@ -53,17 +53,18 @@
       <a href="../projects.html">Projects</a>
     </div>
     <hr>
-
-    <div class="image-crop">
-      <img src="../resources/me.jpg">
-    </div>
-		<h1>Software Project: Paste Buddy Data Entry Tool</h1>
-    <p>This tool was designed to make me more efficient at my job at a call center. I noticed that there were unecessary portions of time spent typing the same phrases over and over to customers in live chats and emails. There were canned responses and email templates that could be used, but the interfaces we used varied in usefulness across platforms. I created something that was portable, and suited the specific needs of that job and my coworkers quickly took a liking to the tool. The tool was written with vanilla CSS, HTML, and JavaScript so it could simply be emailed and saved as an HTML file on the computer. Last I checked, the department still uses the tool on a day to day basis.<br><br> The code is included below and will function, but behaves a little wonky on my personal website. You simply right click to save whatever is in your clipboard into a button, left click to copy it into your clipboard. Middle mouse button toggles the button to add a the current date and optional initials at the end of the text. Feel free to download the source code from my GitHub account.</p>
-    <div> 
-      <div class='new-window center', id='popOut'>
-        <a onclick="newWindow();">
-          Pop Out Window
-        </a>
+    <div class="wrapper">
+      <div class="image-crop">
+        <img src="../resources/me.jpg">
+      </div>
+      <h1>Software Project: Paste Buddy Data Entry Tool</h1>
+      <p>This tool was designed to make me more efficient at my job at a call center. I noticed that there were unecessary portions of time spent typing the same phrases over and over to customers in live chats and emails. There were canned responses and email templates that could be used, but the interfaces we used varied in usefulness across platforms. I created something that was portable, and suited the specific needs of that job and my coworkers quickly took a liking to the tool. The tool was written with vanilla CSS, HTML, and JavaScript so it could simply be emailed and saved as an HTML file on the computer. Last I checked, the department still uses the tool on a day to day basis.<br><br> The code is included below and will function, but behaves a little wonky on my personal website. You simply right click to save whatever is in your clipboard into a button, left click to copy it into your clipboard. Middle mouse button toggles the button to add a the current date and optional initials at the end of the text. Feel free to download the source code from my GitHub account.</p>
+      <div> 
+        <div class='new-window center', id='popOut'>
+          <a onclick="newWindow();">
+            Pop Out Window
+          </a>
+        </div>
       </div>
 
       <div class="btn-group", id='btn-group'>
@@ -335,14 +336,16 @@
         }
       </script>
     
-    <br>
-    <div class="single-item-container">
-      
-        <div class="project-image-container" onclick="location.href='../resources/pastebuddy_in_use.jpg'" >
-          <img src="../resources/pastebuddy_in_use.jpg">
-        </div>
+      <br>
+      <div class="single-item-container">
+          <div class="project-image-container" onclick="location.href='../resources/pastebuddy_in_use.jpg'" >
+            <img src="../resources/pastebuddy_in_use.jpg">
+          </div>
+      </div>
     </div>
-        <!--contact-->
-          <br><hr>&nbspcontact: andrewpeyrot@gmail.com | <a href="https://github.com/mr-weeto">Github</a> | <a href="https://www.linkedin.com/in/andrew-peyrot-27940419a/">LinkedIn</a>
-      </body>
-    </html>
+    <!--contact-->
+    <div class="footer">
+      <hr>&nbspcontact: andrewpeyrot@gmail.com | <a href="https://github.com/mr-weeto">Github</a> | <a href="https://www.linkedin.com/in/andrew-peyrot-27940419a/">LinkedIn</a>
+    </div>
+  </body>
+</html>

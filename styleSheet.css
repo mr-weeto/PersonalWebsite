@@ -8,6 +8,13 @@
 html, body {
   height: 100%;
 }
+body {
+  display: flex;
+  flex-direction: column;
+}
+.wrapper {
+  flex: 1;
+}
 .container {
   display: grid;
   grid-template-areas:
@@ -22,15 +29,6 @@ html, body {
   text-align: center;
   min-height: 100%;
 }
-.wrapper{
-  min-height: 100%;
-  /* equal to footer height */
-  margin-bottom: -25px; 
-}
-.wrapper:after {
-  content: "";
-  display: block;
-}
 .single-item-container {
   display: flex;
   justify-content: center;
@@ -39,8 +37,6 @@ html, body {
   padding: 5px;
   text-align: center;
   font-size:40px;
-  min-height: 100%;
-  width:100%;
 }
 .container div {
   display: flex;
@@ -107,9 +103,6 @@ html, body {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
-}
-.footer, .wrapper:after {
-  height: 25px; 
 }
 .footer {
 }
