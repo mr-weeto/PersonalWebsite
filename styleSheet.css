@@ -1,7 +1,13 @@
 :root {
   --boxHeight: 400px; 
+  --accentColor: #e7f1f2;
 }
-/**/
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
 .container {
   display: grid;
   grid-template-areas:
@@ -10,26 +16,38 @@
     "content content content";
   grid-template-columns: 1fr 1fr 1fr ;
   gap: 3px;
-  background-color: #e7f1f2;
-  border-color: #e7f1f2;
+  background-color: var(--accentColor);
+  border-color: var(--accentColor);
   padding: 5px;
   text-align: center;
+  min-height: 100%;
+}
+.wrapper{
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -25px; 
+}
+.wrapper:after {
+  content: "";
+  display: block;
 }
 .single-item-container {
   display: flex;
   justify-content: center;
   gap: 3px;
-  background-color: #e7f1f2;
+  background-color: var(--accentColor); 
   padding: 5px;
   text-align: center;
   font-size:40px;
+  min-height: 100%;
+  width:100%;
 }
 .container div {
   display: flex;
   text-align: center;
   flex-direction: column;
   background-color: white;
-  border-color: #e7f1f2;
+  border-color: var(--accentColor); 
   object-fit: contain;
   width:100%;
   cursor: pointer;
@@ -89,4 +107,9 @@
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+}
+.footer, .wrapper:after {
+  height: 25px; 
+}
+.footer {
 }
