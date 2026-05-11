@@ -12,6 +12,9 @@ body {
   display: flex;
   flex-direction: column;
 }
+.left-margin{
+  margin: 10px;
+}
 .wrapper {
   flex: 1;
 }
